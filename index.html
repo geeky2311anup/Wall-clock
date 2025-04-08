@@ -7,7 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="styles.css" rel="stylesheet">
     <script defer src="script.js"></script>
-    <title>Clock</title>
+    <title>Clock with Date and Time</title>
+    <style>
+        .datetime {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, calc(-50% + 150px)); /* Adjust position below clock */
+            font-size: 1.5em;
+            color: #333;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,6 +39,28 @@
         <div class="number number11">11</div>
         <div class="number number12">12</div>
     </div>
+
+    <div class="datetime">
+        <div id="date"></div>
+        <div id="time"></div>
+    </div>
+
+    <script>
+        function setDateAndTime() {
+            const now = new Date();
+            const dateElement = document.getElementById('date');
+            const timeElement = document.getElementById('time');
+
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateElement.innerText = now.toLocaleDateString(undefined, options);
+
+            const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+            timeElement.innerText = now.toLocaleTimeString(undefined, timeOptions);
+        }
+
+        setInterval(setDateAndTime, 1000); // Update every second
+        setDateAndTime(); // Initial call to display immediately
+    </script>
 </body>
 
 </html>
